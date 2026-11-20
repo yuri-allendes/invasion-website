@@ -59,3 +59,5 @@ Les liens documentent les services concernés, sans déduire automatiquement la 
 ## Validation et traductions
 
 Le propriétaire a validé la politique et la publication le 20 novembre 2026, puis demandé les versions anglaise et espagnole et la nouvelle accroche. Les traductions reprennent les mêmes traitements et limitations, sans nouvel engagement juridique. Les validations sont enregistrées dans `site.config.mjs`.
+
+Les versions italienne, allemande et portugaise sont ajoutées à la demande du propriétaire. Elles décrivent les mêmes traitements et limites ; aucune nouvelle garantie juridique ni collecte n’est introduite.

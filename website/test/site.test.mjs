@@ -8,13 +8,15 @@ import { deploymentConfig } from '../src/deployment.mjs';
 import { siteConfig } from '../site.config.mjs';
 
 const { site, base } = deploymentConfig();
-const routes = ['', 'privacy/', 'support/', 'en/', 'en/privacy/', 'en/support/', 'es/', 'es/privacy/', 'es/support/'];
+const languages = ['fr', 'en', 'es', 'it', 'de', 'pt'];
+const routes = languages.flatMap(locale => ['', 'privacy/', 'support/'].map(page => `${locale === 'fr' ? '' : `${locale}/`}${page}`));
 const html = route => readFileSync(resolve('dist', route, 'index.html'), 'utf8');
 
-test('les neuf pages statiques sont complètes et accessibles sans JavaScript', () => {
+test('les dix-huit pages statiques sont complètes et accessibles sans JavaScript', () => {
   for (const route of routes) {
     const page = html(route);
-    const locale = route.startsWith('en/') ? 'en' : route.startsWith('es/') ? 'es' : 'fr';
+    const prefix = route.split('/')[0];
+    const locale = languages.includes(prefix) ? prefix : 'fr';
     assert.ok(page.includes(`<html lang="${locale}">`));
     assert.equal((page.match(/<h1(?:\s|>)/g) || []).length, 1);
     assert.match(page, /<main id="contenu">/);
@@ -115,23 +117,26 @@ test('le texte des boutons rouges conserve un contraste suffisant', () => {
 });
 
 
-test('les trois langues couvrent tous les textes et chaque page propose ses traductions', () => {
-  const dictionaries = Object.fromEntries(['fr','en','es'].map(code => [code, JSON.parse(readFileSync(`src/i18n/${code}.json`, 'utf8'))]));
-  for (const locale of ['en','es']) {
+test('les six langues couvrent tous les textes et chaque page propose ses traductions', () => {
+  const dictionaries = Object.fromEntries(languages.map(code => [code, JSON.parse(readFileSync(`src/i18n/${code}.json`, 'utf8'))]));
+  for (const locale of languages.filter(code => code !== 'fr')) {
     assert.deepEqual(Object.keys(dictionaries[locale]).sort(), Object.keys(dictionaries.fr).sort());
     assert.ok(Object.values(dictionaries[locale]).every(text => text.trim().length > 0));
+    for (const [key, value] of Object.entries(dictionaries[locale])) {
+      if (key.trim().length > 35) assert.notEqual(value, key, `Texte français non traduit : ${locale}: ${key}`);
+    }
   }
   for (const route of routes) {
     const page = html(route);
-    const section = route.replace(/^(en|es)\//, '');
-    for (const locale of ['fr','en','es']) {
+    const section = route.replace(/^(en|es|it|de|pt)\//, '');
+    for (const locale of languages) {
       const target = `${base}${locale === 'fr' ? '' : `${locale}/`}${section}`;
       assert.ok(page.includes(`hreflang="${locale}" href="${site}${target}"`));
       assert.ok(page.includes(`href="${target}" lang="${locale}"`));
     }
     assert.doesNotMatch(page, /noindex|Texte préparé pour validation|Private preview|Vista previa privada/);
   }
-  for (const locale of ['fr','en','es']) {
+  for (const locale of languages) {
     const prefix = locale === 'fr' ? '' : `${locale}/`;
     const text = dictionaries[locale][' Un jeu de bluff, de suspicion et de trahison entre amis'].trim();
     assert.ok(html(prefix).includes(text));

@@ -797,6 +797,6 @@ details[open] summary {
   .site-header .language-switcher { width: 100%; justify-content: flex-end; }
 }
 @media (max-width: 700px) {
-  .site-header .language-switcher { gap: 22px; justify-content: center; }
+  .site-header .language-switcher { column-gap: 22px; row-gap: 8px; justify-content: center; }
   .hero .eyebrow { max-width: 290px; }
 }

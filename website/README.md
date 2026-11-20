@@ -1,6 +1,6 @@
 # Site officiel INVASION
 
-Site Astro statique, indépendant de Flutter : accueil, confidentialité et assistance, en français, anglais et espagnol. Sans backend, service analytique, cookie publicitaire ou formulaire de collecte. Aucun lien de téléchargement actif. Site publié sur GitHub Pages le 20 novembre 2026.
+Site Astro statique, indépendant de Flutter : accueil, confidentialité et assistance, en français, anglais, espagnol, italien, allemand et portugais. Sans backend, service analytique, cookie publicitaire ou formulaire de collecte. Aucun lien de téléchargement actif. Site publié sur GitHub Pages le 20 novembre 2026.
 
 Adresse de publication préparée : **https://yuri-allendes.github.io/invasion-website/**.
 
@@ -64,11 +64,11 @@ Recompiler sans cette variable pour rétablir la sortie GitHub Pages. Si vous pr
 
 ## Contenu et ressources
 
-- `src/pages/` : neuf routes statiques (trois pages par langue). Le français reste à la racine, l’anglais sous `en/`, l’espagnol sous `es/`. Les gabarits partagés sont dans `src/components/`. La politique reste fondée sur les traitements constatés, sans durée de conservation ou garantie juridique inventée.
+- `src/pages/` : dix-huit routes statiques (trois pages par langue). Le français reste à la racine, l’anglais sous `en/`, l’espagnol sous `es/`, l’italien sous `it/`, l’allemand sous `de/` et le portugais sous `pt/`. Les gabarits partagés sont dans `src/components/`. La politique reste fondée sur les traitements constatés, sans durée de conservation ou garantie juridique inventée.
 - `docs/PRIVACY_AUDIT.md` : sources de l'audit, détails internes et points non vérifiés. Ce document n'est pas servi par le site.
 - `site.config.mjs` : Yuri Allendes, Suisse, `support.invasion@gmail.com`, date de rédaction et validations. Ne pas y placer de secret.
 - `src/layouts/Shell.astro` et `src/styles/global.css` : navigation, pied de page, métadonnées, responsive, focus clavier et réduction des mouvements.
-- `src/i18n/` : dictionnaires complets `fr.json`, `en.json`, `es.json` et métadonnées communes dans `index.ts`. Les clés françaises servent de référence ; chaque nouvelle chaîne doit avoir ses trois traductions. Une chaîne manquante bloque la compilation. Le sélecteur conserve le type de page et les balises `hreflang` relient ses traductions. Pour une langue supplémentaire, ajouter son dictionnaire, ses métadonnées et ses trois routes, puis étendre les tests.
+- `src/i18n/` : dictionnaires complets `fr.json`, `en.json`, `es.json`, `it.json`, `de.json`, `pt.json` et métadonnées communes dans `index.ts`. Les clés françaises servent de référence ; chaque nouvelle chaîne doit avoir ses six traductions. Une chaîne manquante bloque la compilation. Le sélecteur conserve le type de page et les balises `hreflang` relient ses traductions. Pour une langue supplémentaire, ajouter son dictionnaire, ses métadonnées et ses trois routes, puis étendre les tests.
 - `public/media/` : illustration d'accueil et deux captures iOS optimisées, issues du projet, participants fictifs. Confirmation du propriétaire sur leur provenance consignée dans l'audit.
 
 Le nom typographique INVASION reste utilisé. Un logo autonome peut être ajouté ultérieurement via `officialLogo` ; il est facultatif pour compiler et publier, et aucun nouveau logo n'est inventé. Les emplacements App Store et Google Play restent non cliquables tant que leurs liens publics ne sont pas confirmés.
@@ -118,7 +118,7 @@ Les tests vérifient les trois pages, les liens/ancres/médias, les métadonnée
 
 ## Version multilingue — 20 novembre 2026
 
-Nouvelle accroche : « Un jeu de bluff, de suspicion et de trahison entre amis ». Les neuf routes sont compilées et couvertes par les tests : liens internes, médias partagés, texte alternatif, métadonnées, navigation et sélecteur conservant la page. Aucun JavaScript côté navigateur ni redirection automatique selon la langue. Les captures iOS restent les illustrations authentiques de l’application, dans leur langue d’origine.
+Nouvelle accroche : « Un jeu de bluff, de suspicion et de trahison entre amis ». Les dix-huit routes sont compilées et couvertes par les tests : liens internes, médias partagés, texte alternatif, métadonnées, navigation et sélecteur conservant la page. Aucun JavaScript côté navigateur ni redirection automatique selon la langue. Les captures iOS restent les illustrations authentiques de l’application, dans leur langue d’origine.
 
 La destination française reste `https://yuri-allendes.github.io/invasion-website/`, l’anglais est sous `en/` et l’espagnol sous `es/`. Les URL de confidentialité et d’assistance restent disponibles en français pour les stores ; leurs traductions existent aussi dans chaque sous-dossier.
 
@@ -131,3 +131,7 @@ La destination française reste `https://yuri-allendes.github.io/invasion-websit
 - Sources publiées : commit `b6a8b57` dans `yuri-allendes/invasion-website`. Le dépôt Flutter n'a pas été poussé.
 - [Workflow du premier déploiement réussi](https://github.com/yuri-allendes/invasion-website/actions/runs/44776390534). Source Pages : GitHub Actions ; HTTPS imposé.
 - Neuf pages contrôlées en HTTP 200, langues/canoniques/sélecteur vérifiés, médias et feuille de style accessibles, navigation française/anglaise/espagnole essayée sur le site public. Neuf tests locaux réussis.
+
+## Langues supplémentaires
+
+L’italien (`it/`), l’allemand (`de/`) et le portugais (`pt/`) sont ajoutés aux trois langues initiales. Les trois types de pages, les métadonnées, les textes alternatifs, la navigation et les FAQ sont traduits. Les sélecteurs et liens `hreflang` proposent les six versions en conservant la page consultée. Le portugais utilise les conventions du Portugal (`pt_PT`) ; l’allemand utilise l’orthographe suisse (`de_CH`). Aucun traitement de données ou engagement de la politique n’est ajouté par ces traductions.
