@@ -1,6 +1,6 @@
 # Site officiel INVASION
 
-Site Astro statique, indépendant de Flutter : accueil, confidentialité et assistance, en français, anglais et espagnol. Sans backend, service analytique, cookie publicitaire ou formulaire de collecte. Aucun lien de téléchargement actif. Aucun déploiement effectué.
+Site Astro statique, indépendant de Flutter : accueil, confidentialité et assistance, en français, anglais et espagnol. Sans backend, service analytique, cookie publicitaire ou formulaire de collecte. Aucun lien de téléchargement actif. Site publié sur GitHub Pages le 20 novembre 2026.
 
 Adresse de publication préparée : **https://yuri-allendes.github.io/invasion-website/**.
 
@@ -97,7 +97,7 @@ Ne pas rendre le dépôt Flutter public pour héberger ce site. Ne pas copier le
 5. Dans **Actions → Site INVASION — publication manuelle → Run workflow**, sélectionner la version approuvée et saisir `PUBLIER`.
 6. Le workflow contrôle l'autorisation, compile, teste et déploie uniquement le site statique. Attendre son succès puis vérifier les trois URL, les images et le contact sur ordinateur et mobile avant de les renseigner dans les stores.
 
-Aucune publication GitHub n'a été exécutée ici. La compilation locale ne prouve ni l'existence du dépôt distant ni le succès d'un déploiement Pages.
+Le premier déploiement a réussi le 20 novembre 2026, via le workflow manuel. Pour les versions suivantes, attendre de nouveau le succès du workflow et contrôler les URL publiques ; une compilation locale seule ne prouve pas la mise en ligne.
 
 ## Points restant à valider
 
@@ -121,3 +121,13 @@ Les tests vérifient les trois pages, les liens/ancres/médias, les métadonnée
 Nouvelle accroche : « Un jeu de bluff, de suspicion et de trahison entre amis ». Les neuf routes sont compilées et couvertes par les tests : liens internes, médias partagés, texte alternatif, métadonnées, navigation et sélecteur conservant la page. Aucun JavaScript côté navigateur ni redirection automatique selon la langue. Les captures iOS restent les illustrations authentiques de l’application, dans leur langue d’origine.
 
 La destination française reste `https://yuri-allendes.github.io/invasion-website/`, l’anglais est sous `en/` et l’espagnol sous `es/`. Les URL de confidentialité et d’assistance restent disponibles en français pour les stores ; leurs traductions existent aussi dans chaque sous-dossier.
+
+## Première publication vérifiée
+
+- Site : https://yuri-allendes.github.io/invasion-website/
+- Confidentialité : https://yuri-allendes.github.io/invasion-website/privacy/
+- Assistance : https://yuri-allendes.github.io/invasion-website/support/
+- Versions anglaise et espagnole : sous `en/` et `es/`.
+- Sources publiées : commit `b6a8b57` dans `yuri-allendes/invasion-website`. Le dépôt Flutter n'a pas été poussé.
+- [Workflow du premier déploiement réussi](https://github.com/yuri-allendes/invasion-website/actions/runs/44776390534). Source Pages : GitHub Actions ; HTTPS imposé.
+- Neuf pages contrôlées en HTTP 200, langues/canoniques/sélecteur vérifiés, médias et feuille de style accessibles, navigation française/anglaise/espagnole essayée sur le site public. Neuf tests locaux réussis.
