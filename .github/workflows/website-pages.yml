@@ -1,0 +1,50 @@
+name: Site INVASION — publication manuelle
+
+# Aucun déploiement à la suite d'un push. Nécessite une action explicite.
+on:
+  workflow_dispatch:
+    inputs:
+      approval:
+        description: 'Après validation du contenu, saisir PUBLIER pour déployer'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: invasion-website-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: inputs.approval == 'PUBLIER'
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://yuri-allendes.github.io
+      SITE_BASE: /invasion-website/
+      ASTRO_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Vérifier, compiler et préparer les seuls fichiers statiques
+        uses: withastro/action@v6
+        with:
+          path: website
+          node-version: 24
+          package-manager: npm
+          build-cmd: npm run check:publication && npm run build:release && npm test
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publier sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

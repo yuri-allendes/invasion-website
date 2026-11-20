@@ -1,0 +1,51 @@
+---
+import Shell from '../layouts/Shell.astro';
+
+
+const url = (path = '') => localizedUrl(path, locale, import.meta.env.BASE_URL);
+
+import { withBase } from '../paths.mjs';
+import { tr, localizedUrl } from '../i18n';
+const { locale = 'fr' } = Astro.props;
+---
+<Shell locale={locale} title={tr(locale, "Parmi vos amis")} page="home">
+  <section class="hero" aria-labelledby="hero-title">
+    <img class="hero-art" src={withBase('media/corridor.jpg', import.meta.env.BASE_URL)} alt={tr(locale, "Un équipage humain face à des membres transformés en parasites, dans un corridor éclairé de cyan et de rouge.")} width="1690" height="931" fetchpriority="high" />
+    <div class="hero-shade"></div>
+    <div class="hero-copy wrap">
+      <p class="eyebrow"><span class="signal" aria-hidden="true"></span>{tr(locale, " Un jeu de bluff, de suspicion et de trahison entre amis")}</p>
+      <h1 id="hero-title">{tr(locale, "Parmi vos amis,")}<br />{tr(locale, "certains ne sont")}<br /><em>{tr(locale, "plus humains.")}</em></h1>
+      <p class="hero-description">{tr(locale, "Vous connaissez leurs visages.")}<br />{tr(locale, "Pouvez-vous encore leur faire confiance ?")}</p>
+      <div class="hero-buttons"><a class="button primary" href="#le-jeu">{tr(locale, "Découvrez INVASION")}</a><a class="text-link" href={url('support/')}>{tr(locale, "Préparer une partie")}</a></div>
+      <p class="availability">{tr(locale, "Prochainement sur Android et iOS")}</p>
+    </div>
+  </section>
+  <div class="facts wrap" aria-label={tr(locale, "Une partie d’INVASION")}>
+    <div><strong>5–25</strong><span>{tr(locale, "joueurs")}</span></div>
+    <div><strong>1</strong><span>{tr(locale, "maître du jeu supplémentaire")}</span></div>
+    <div><strong>{tr(locale, "Ensemble")}</strong><span>{tr(locale, "sur le même réseau local")}</span></div>
+  </div>
+  <section id="le-jeu" class="section wrap story">
+    <div><p class="eyebrow">{tr(locale, "Deux camps. Un doute permanent.")}</p><h2>{tr(locale, "L’ennemi a")}<br />{tr(locale, "un visage familier.")}</h2></div>
+    <div class="story-copy"><p>{tr(locale, "Parmi les humains se cachent des parasites. Les uns tentent de démasquer la menace. Les autres avancent dans l’ombre, dissimulent leur véritable nature et infectent l’équipage.")}</p><p>{tr(locale, "Autour de vous, les regards changent. Une accusation suffit à faire vaciller une alliance. Un vote peut tout faire basculer.")}</p><p class="accent">{tr(locale, "Votre téléphone garde les secrets.")}<br />{tr(locale, "Vous menez la discussion.")}</p></div>
+  </section>
+  <section class="section wrap rhythm" aria-labelledby="rythme-title">
+    <div class="section-heading"><p class="eyebrow">{tr(locale, "Au fil de la partie")}</p><h2 id="rythme-title">{tr(locale, "Observez. Doutez. Décidez.")}</h2></div>
+    <ol class="steps">
+      <li><span class="step-number">01</span><h3>{tr(locale, "Un rôle secret")}</h3><p>{tr(locale, "Découvrez votre camp et vos capacités à l’abri des regards. Chaque joueur sait quelque chose que les autres ignorent.")}</p></li>
+      <li><span class="step-number">02</span><h3>{tr(locale, "Des nuits incertaines")}</h3><p>{tr(locale, "Choisissez vos actions en privé. Au réveil, découvrez les conséquences de la nuit et cherchez les indices.")}</p></li>
+      <li><span class="step-number">03</span><h3>{tr(locale, "Des choix collectifs")}</h3><p>{tr(locale, "Discutez à voix haute, confrontez vos soupçons et votez lorsque le maître du jeu ouvre les votes.")}</p></li>
+    </ol>
+  </section>
+  <section class="section app-section" aria-labelledby="app-title">
+    <div class="wrap app-grid">
+      <div class="app-copy"><p class="eyebrow">{tr(locale, "Les secrets à l’écran. Le jeu entre vous.")}</p><h2 id="app-title">{tr(locale, "Moins de gestion.")}<br /><em>{tr(locale, "Plus de soupçons.")}</em></h2><p>{tr(locale, "INVASION accompagne la partie : rôles confidentiels, actions et votes sur les téléphones. Le maître du jeu reste au cœur de l’expérience et rythme les échanges.")}</p><p>{tr(locale, "Les joueurs participent gratuitement. Une licence d’hébergement, achetée par le MJ, permet d’accueillir jusqu’à 25 joueurs.")}</p><a class="text-link" href={url('support/#achats')}>{tr(locale, "Comprendre la licence MJ")}</a></div>
+      <div class="screens" aria-label={tr(locale, "Aperçu de l’application iOS")}><figure class="screen screen-back"><img src={withBase('media/vote.jpg', import.meta.env.BASE_URL)} alt={tr(locale, "Écran iOS de vote avec une liste de participants fictifs.")} width="644" height="1400" loading="lazy" /><figcaption>{tr(locale, "Le vote du jour")}</figcaption></figure><figure class="screen screen-front"><img src={withBase('media/role-secret.jpg', import.meta.env.BASE_URL)} alt={tr(locale, "Écran iOS de révélation d’une carte de rôle secret.")} width="644" height="1400" loading="lazy" /><figcaption>{tr(locale, "Votre rôle, en privé")}</figcaption></figure></div>
+    </div>
+  </section>
+  <section class="section wrap gathering" aria-labelledby="ensemble-title">
+    <p class="eyebrow">{tr(locale, "Une pièce. Votre groupe. Une partie.")}</p><h2 id="ensemble-title">{tr(locale, "Réunissez l’équipage.")}</h2><p>{tr(locale, "De 5 à 25 joueurs, un maître du jeu non joueur et des appareils Android ou iOS connectés au même réseau local. Après activation de la licence, la partie se joue sans connexion Internet.")}</p><p class="muted">{tr(locale, "Le réseau local doit autoriser les appareils à communiquer entre eux. Les achats et restaurations passent par les stores et nécessitent Internet.")}</p>
+    <div class="store-links" aria-label={tr(locale, "Disponibilité à venir")}><span class="store-badge" aria-disabled="true"><small>{tr(locale, "Prochainement sur")}</small><strong>{tr(locale, "App Store")}</strong></span><span class="store-badge" aria-disabled="true"><small>{tr(locale, "Prochainement sur")}</small><strong>{tr(locale, "Google Play")}</strong></span></div>
+    <a class="text-link" href={url('support/')}>{tr(locale, "Une question avant de jouer ?")}</a>
+  </section>
+</Shell>

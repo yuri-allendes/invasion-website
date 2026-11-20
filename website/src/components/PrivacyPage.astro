@@ -1,0 +1,59 @@
+---
+import Shell from '../layouts/Shell.astro';
+import { siteConfig } from '../../site.config.mjs';
+
+import { tr, localizedUrl } from '../i18n';
+const { locale = 'fr' } = Astro.props;
+const updatedDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Zurich' }).format(new Date(`${siteConfig.updatedOn}T12:00:00Z`));
+---
+<Shell locale={locale} title={tr(locale, "Politique de confidentialité")} page="privacy" description={tr(locale, "Comment INVASION utilise les données de partie, les sauvegardes locales, les achats intégrés et les demandes d’assistance.")}>
+  <div class="wrap document-header">
+    <p class="eyebrow">{tr(locale, "Vos données")}</p>
+    <h1>{tr(locale, "Politique de")}<br /><em>{tr(locale, "confidentialité.")}</em></h1>
+    <p>{tr(locale, "L’essentiel sur les données utilisées par le jeu et ce site.")}</p>
+  </div>
+  <div class="wrap document-grid">
+    <aside class="document-toc" aria-label={tr(locale, "Sommaire")}>
+      <p class="eyebrow">{tr(locale, "Dans cette page")}</p>
+      <a href="#parties">{tr(locale, "Parties en réseau local")}</a>
+      <a href="#stockage">{tr(locale, "Stockage et suppression")}</a>
+      <a href="#camera">{tr(locale, "Caméra et QR codes")}</a>
+      <a href="#achats">{tr(locale, "Achats intégrés")}</a>
+      <a href="#site">{tr(locale, "Site et diagnostics")}</a>
+      <a href="#contact">{tr(locale, "Assistance et contact")}</a>
+    </aside>
+    <article class="prose">
+      {!siteConfig.publication.privacyReviewed && <p class="notice">{tr(locale, "Texte préparé pour validation avant publication.")}</p>}
+      <p>{tr(locale, "Mis à jour le ")}<time datetime={siteConfig.updatedOn}>{updatedDate}</time>{tr(locale, ". INVASION est édité par ")}{siteConfig.editor}{tr(locale, ", à titre personnel, en ")}{tr(locale, siteConfig.country)}.</p>
+      <section id="parties">
+        <h2>{tr(locale, "Parties en réseau local")}</h2>
+        <p>{tr(locale, "INVASION fonctionne sans compte utilisateur INVASION obligatoire et sans serveur de jeu INVASION. L’appareil du maître du jeu héberge la partie sur le réseau local.")}</p>
+        <p>{tr(locale, "Le jeu utilise votre pseudonyme, votre apparence, des identifiants techniques et les informations de partie : rôles, actions, votes et résultats. Ces données sont conservées localement et les informations nécessaires sont échangées entre les appareils participants. Le MJ dispose des informations utiles à l’administration de la partie. Des adresses réseau et des jetons permettent la connexion et la reconnexion.")}</p>
+      </section>
+      <section id="stockage">
+        <h2>{tr(locale, "Stockage et suppression")}</h2>
+        <p>{tr(locale, "Les sauvegardes servent à reprendre les parties. La langue choisie et les justificatifs de licence sont aussi conservés sur l’appareil. Des clés placées dans le stockage protégé du système permettent de protéger les données sensibles et les échanges.")}</p>
+        <p>{tr(locale, "Hors partie active, vous pouvez supprimer une sauvegarde dans ")}<strong>{tr(locale, "Paramètres → Sauvegardes locales")}</strong>{tr(locale, ". Cette action ne supprime pas les licences, les clés protégées ou les copies présentes sur d’autres appareils. Des sauvegardes ou transferts système peuvent exister selon la plateforme et ses réglages. Sur iOS, certains éléments du trousseau peuvent subsister après désinstallation.")}</p>
+      </section>
+      <section id="camera">
+        <h2>{tr(locale, "Caméra et QR codes")}</h2>
+        <p>{tr(locale, "L’accès à la caméra est demandé pour scanner une invitation. Le parcours de scan n’enregistre pas les images et ne les envoie pas à l’éditeur. Vous pouvez utiliser le code d’invitation manuellement sans autoriser la caméra.")}</p>
+      </section>
+      <section id="achats">
+        <h2>{tr(locale, "Achats intégrés")}</h2>
+        <p>{tr(locale, "Les achats et restaurations de licence passent par Apple ou Google et nécessitent une connexion à leurs services. L’application utilise des identifiants et justificatifs de transaction pour vérifier les droits, puis les conserve dans un cache protégé. Elle ne reçoit pas votre numéro de carte bancaire. Une licence déjà validée permet de jouer sur le réseau local sans Internet.")}</p>
+        <p>{tr(locale, "Les stores traitent les données selon leurs propres politiques : ")}<a href="https://www.apple.com/legal/privacy/fr-ww/">{tr(locale, "Apple")}</a>{tr(locale, " et ")}<a href="https://policies.google.com/privacy?hl=fr">{tr(locale, "Google")}</a>.</p>
+      </section>
+      <section id="site">
+        <h2>{tr(locale, "Site et diagnostics")}</h2>
+        <p>{tr(locale, "Le jeu examiné n’intègre ni publicité, ni outil analytique, ni envoi automatique de rapports d’erreur à l’éditeur. Des diagnostics techniques locaux peuvent être produits. Apple, Google et le système peuvent proposer leurs propres services de diagnostic.")}</p>
+        <p>{tr(locale, "Ce site n’ajoute aucun cookie publicitaire, outil analytique ou formulaire de collecte. Son hébergement prévu, GitHub Pages, journalise notamment les adresses IP des visiteurs pour sa sécurité. Consultez la ")}<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">{tr(locale, "politique de GitHub")}</a>.</p>
+      </section>
+      <section id="contact">
+        <h2>{tr(locale, "Assistance et contact")}</h2>
+        <p>{tr(locale, "Pour une question sur vos données ou une demande d’assistance, écrivez à ")}<a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>{tr(locale, ". Votre adresse et le contenu du message sont utilisés pour traiter votre demande. Cette boîte est hébergée par Gmail, un service Google.")}</p>
+        <p>{tr(locale, "N’envoyez pas de mot de passe, de clé privée ou de justificatif d’achat complet. L’éditeur n’a pas d’accès distant aux sauvegardes conservées uniquement sur les appareils des participants.")}</p>
+      </section>
+    </article>
+  </div>
+</Shell>

@@ -1,0 +1,18 @@
+{
+  "name": "invasion-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": { "node": ">=22.23.4" },
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build:release": "node scripts/check-publication.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "check:publication": "node scripts/check-publication.mjs --publication",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1",
+    "stop:preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview stop",
+    "stop:dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev stop",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": { "astro": "7.4.13" }
+}

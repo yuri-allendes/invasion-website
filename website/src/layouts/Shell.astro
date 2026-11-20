@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import { siteConfig } from '../../site.config.mjs';
+import { withBase } from '../paths.mjs';
+import { messages, locales, tr, localizedUrl } from '../i18n';
+const { locale = 'fr' } = Astro.props;
+const t = messages[locale];
+const { title, description = t.description, page = 'home' } = Astro.props;
+const url = (path = '') => localizedUrl(path, locale, import.meta.env.BASE_URL);
+const asset = (path) => withBase(path, import.meta.env.BASE_URL);
+const approved = Object.values(siteConfig.publication).every(value => value === true)
+  && !!siteConfig.editor && !!siteConfig.email && !!siteConfig.reviewedOn;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL(asset('media/corridor.jpg'), Astro.site).href : undefined;
+const links = [['home', '', t.navigation.home], ['support', 'support/', t.navigation.support], ['privacy', 'privacy/', t.navigation.privacy]];
+---
+<!doctype html>
+<html lang={t.language}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07151e" />
+    <title>{title} · INVASION</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={approved && canonical ? 'index,follow' : 'noindex,nofollow'} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {Astro.site && locales.map(code => <link rel="alternate" hreflang={code} href={new URL(localizedUrl(page === 'home' ? '' : `${page}/`, code, import.meta.env.BASE_URL), Astro.site).href} />)}
+    {Astro.site && <link rel="alternate" hreflang="x-default" href={new URL(localizedUrl(page === 'home' ? '' : `${page}/`, 'fr', import.meta.env.BASE_URL), Astro.site).href} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={t.ogLocale} />
+    <meta property="og:site_name" content="INVASION" />
+    <meta property="og:title" content={`${title} · INVASION`} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image:alt" content={tr(locale, "Un équipage humain face à des membres transformés en parasites, dans un corridor éclairé de cyan et de rouge.")} />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">{t.skip}</a>
+    {!approved && <div class="draft-banner">{t.draft}</div>}
+    <header class="site-header wrap">
+      <a class="brand" href={url()} aria-label={t.homeLabel}>
+        {siteConfig.officialLogo ? <img src={asset(siteConfig.officialLogo)} alt="INVASION" width="180" height="40" /> : <span>INVASION</span>}
+      </a>
+      <nav aria-label={t.navLabel}>
+        {links.map(([key, path, label]) => <a href={url(path)} aria-current={page === key ? 'page' : undefined}>{label}</a>)}
+      </nav>
+      <nav class="language-switcher" aria-label={t.languageLabel}>
+        {locales.map(code => <a href={localizedUrl(page === 'home' ? '' : `${page}/`, code, import.meta.env.BASE_URL)} lang={code} hreflang={code} aria-current={locale === code ? 'true' : undefined}>{messages[code].label}</a>)}
+      </nav>
+    </header>
+    <main id="contenu"><slot /></main>
+    <footer class="site-footer wrap">
+      <div><span class="brand">INVASION</span><p>{t.footerMotto}</p></div>
+      <nav aria-label={t.footerNav}>
+        <a href={url('support/')}>{tr(locale, "Assistance et contact")}</a>
+        <a href={url('privacy/')}>{tr(locale, "Politique de confidentialité")}</a>
+      </nav>
+      <p class="copyright">© {new Date().getFullYear()} {siteConfig.editor || 'INVASION · Éditeur à confirmer'}<br />Android & iOS · {t.soon}</p>
+    </footer>
+  </body>
+</html>
