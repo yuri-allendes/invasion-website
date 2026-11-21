@@ -61,3 +61,7 @@ Les liens documentent les services concernés, sans déduire automatiquement la 
 Le propriétaire a validé la politique et la publication le 20 novembre 2026, puis demandé les versions anglaise et espagnole et la nouvelle accroche. Les traductions reprennent les mêmes traitements et limitations, sans nouvel engagement juridique. Les validations sont enregistrées dans `site.config.mjs`.
 
 Les versions italienne, allemande et portugaise sont ajoutées à la demande du propriétaire. Elles décrivent les mêmes traitements et limites ; aucune nouvelle garantie juridique ni collecte n’est introduite.
+
+## Terminologie — 21 novembre 2026
+
+Les abréviations visibles du rôle de maître du jeu sont remplacées par leur forme complète dans les six langues. Les textes décrivent les mêmes traitements. La nouvelle commande de vibration de l’application mobile reste locale, ciblée et éphémère ; sa capacité et ses accusés de réception ne sont ni stockés dans un journal de partie ni envoyés à l’éditeur.
